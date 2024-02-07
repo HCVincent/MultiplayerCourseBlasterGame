@@ -17,6 +17,7 @@
 #include "Components/Image.h"
 #include "Blaster/HUD/ReturnToMainMenu.h"
 #include "Blaster/BlasterTypes/Announcement.h"
+#include "GameFramework/PlayerState.h"
 
 void ABlasterPlayerController::BroadcastElim(APlayerState* Attacker, APlayerState* Victim)
 {
@@ -151,7 +152,7 @@ void ABlasterPlayerController::CheckPing(float DeltaTime)
 		PlayerState = PlayerState == nullptr ? GetPlayerState<APlayerState>() : PlayerState;
 		if (PlayerState)
 		{
-			if (PlayerState->GetPing() * 4 > HighPingThreshold) // ping is compressed; it's actually ping / 4
+			if (PlayerState->GetCompressedPing() * 4 > HighPingThreshold) // ping is compressed; it's actually ping / 4
 			{
 				HighPingWarning();
 				PingAnimationRunningTime = 0.f;
